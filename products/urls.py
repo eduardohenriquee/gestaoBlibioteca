@@ -7,4 +7,5 @@ urlpatterns = [
     path('new', views.ProductCreate.as_view(), name='product_new'),
     path('edit/<int:pk>', views.ProductUpdate.as_view(), name='product_edit'),
     path('delete/<int:pk>', views.ProductDelete.as_view(), name='product_delete'),
+    path('export-books-csv/', views.export_books_csv, name='export_books_csv'),
 ]
