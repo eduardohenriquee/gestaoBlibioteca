@@ -1,22 +1,38 @@
 {% extends 'products/base.html' %}
 
 {% block content %}
-    <h1 class="my-4">{% if request.path == '/new' %} Novo Livro {% else %} Edit - {% endif %}
-        {% if request.path != '/new' %}<small>{{ product.name }}</small>{% endif %}
-    </h1>
-    <div class="row">
-        <div class="col-12">
-            <form method="POST">
-                {% csrf_token %}
-                {% for field in form %}
-                    <div class="form-group">
-                        {{ field.label_tag }}
-                        {{ field }}
+    <div class="container mt-4">
+        <h1 class="mb-4">
+                Novo Livro
+        </h1>
+
+        <div class="card">
+            <div class="card-body">
+                <form method="POST" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group mb-3">
+                            {{ field.label_tag }}
+                            {{ field }}
+                            {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                            {% endif %}
+                            {% if field.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ field.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary">
+                            {% if request.path == '/new' %}Adicionar{% else %}Atualizar{% endif %}
+                        </button>
+                        <a href="{% url 'product_list' %}" class="btn btn-secondary ms-2">Voltar</a>
                     </div>
-                {% endfor %}
-                <input type="submit" {% if request.path == '/new' %} value="Add" {% else %} value="Update" {% endif %} class="btn btn-success"/>
-                <a href="{% url 'product_list' %}"><button type="button" class="btn btn-secondary">Back</button></a>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}

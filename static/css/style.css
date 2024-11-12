@@ -1,14 +1,87 @@
 /* static/css/style.css */
 body {
-    background: whitesmoke
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-#app {
-    background: white;
-    padding: 30px;
-    margin: 30px auto;
-    -webkit-box-shadow: 1px 1px 2px 0px rgba(224,224,224,1);
-    -moz-box-shadow: 1px 1px 2px 0px rgba(224,224,224,1);
-    box-shadow: 1px 1px 2px 0px rgba(224,224,224,1);
-    border-radius: 4px;
+
+/* Estilos da navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    padding: 1rem 0;
+    gap: 1rem;
 }
-.top-buffer { margin-top:20px; }
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff !important;
+}
+
+/* Estilo dos botões na navbar */
+.navbar .btn {
+    margin: 0 5px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.navbar .btn-outline-info {
+    color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.navbar .btn-outline-info:hover {
+    background-color: #17a2b8;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Container principal */
+.container#app {
+    padding: 2rem 15px;
+    min-height: calc(100vh - 76px);
+}
+
+.btn-group{
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+}
+
+
+.badge{
+    font-size: 1rem;
+}
+
+.badge-success{
+    background-color: #28a745;
+}
+
+.badge-warning{
+    background-color: #ff9800;
+}
+
+.badge-info{
+    background-color: #007bff;
+}
+
+.badge-danger{
+    background-color: #f44336;
+}
+
+/* Responsividade */
+@media (max-width: 991.98px) {
+    .navbar .btn {
+        margin: 5px 0;
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
+    
+    .navbar-collapse {
+        padding: 1rem 0;
+    }
+}

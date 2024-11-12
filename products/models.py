@@ -7,6 +7,18 @@ class Product(models.Model):
     price = models.DecimalField('Price', decimal_places=2, max_digits=8)
     created = models.DateTimeField('Created', auto_now_add=True)
     changed = models.DateTimeField('Changed', auto_now=True)
+    available = models.BooleanField(default=True)
+    STATUS_CHOICES = [
+        ('disponivel', 'Disponível'),
+        ('emprestado', 'Emprestado'),
+        ('em_manutencao', 'Em Manutenção'),
+        ('indisponivel', 'Indisponível'),
+    ]
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='disponivel'
+    )
 
     class Meta:
         ordering = ['name']
