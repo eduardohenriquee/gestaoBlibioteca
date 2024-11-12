@@ -12,7 +12,6 @@ import csv
 from .models import Product
 from .forms import ProductForm
 
-# Classes existentes
 class ProductList(ListView): 
     model = Product
 
@@ -41,14 +40,20 @@ def export_books_csv(request):
     response['Content-Disposition'] = 'attachment; filename="livros.csv"'
 
     writer = csv.writer(response)
-    writer.writerow(['Nome', 'Descrição', 'Preço'])
+    writer.writerow(['Nome', 'Descrição', 'Preço', 'Status'])
 
-    products = Product.objects.all()
+    status = request.GET.get('status')
+
+    if status:
+        products = Product.objects.filter(status=status)
+    else:
+        products = Product.objects.all()
 
     for product in products:
-        writer.writerow([product.name, product.description, product.price])
+        writer.writerow([product.name, product.description, product.price, product.status])
 
     return response
+
 
 
 def reserve_book(request, pk):
@@ -61,7 +66,6 @@ def reserve_book(request, pk):
         messages.error(request, 'Este livro não está disponível para reserva.')
     return redirect('product_list')
 
-# Novas funções baseadas em permissões
 @permission_required('products.add_product')
 def adicionar_produto(request):
     if request.method == 'POST':
